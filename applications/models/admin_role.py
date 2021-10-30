@@ -12,7 +12,6 @@ class Role(db.Model):
     enable = db.Column(db.Integer)
     remark = db.Column(db.String(255))
     details = db.Column(db.String(255))
-    sort = db.Column(db.Integer)
     create_time = db.Column(db.DateTime, default=datetime.datetime.now)
     update_time = db.Column(
         db.DateTime,
@@ -31,7 +30,6 @@ class RoleSchema(ma.Schema):
     enable = fields.Str()
     remark = fields.Str()
     details = fields.Str()
-    sort = fields.Integer()
     create_at = fields.DateTime()
     update_at = fields.DateTime()
 

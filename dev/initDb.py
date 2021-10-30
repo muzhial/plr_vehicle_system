@@ -67,7 +67,7 @@ def init_db():
         return
     if init_database():
         print('Database %s create succ' % str(DATABASE))
-    # execute_fromfile('pear.sql')
+    execute_fromfile('pear.sql')
     print('Table create succ')
     print('Database config done')
 

@@ -6,7 +6,7 @@ from flask_marshmallow import Marshmallow
 ma = Marshmallow()
 
 
-@index_index.route('/')
-def index():
-    return render_template('index/index.html')
+# @index_index.route('/')
+# def index():
+    # return render_template('index/index.html')
 

@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     realname = db.Column(db.String(20))
     avatar = db.Column(
         db.String(255),
-        default="/static/admin/admin/images/avatar.jpg")
+        default="")
     remark = db.Column(db.String(255), comment='remark')
     password_hash = db.Column(db.String(128))
     enable = db.Column(db.Integer, default=0)

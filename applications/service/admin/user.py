@@ -7,19 +7,21 @@ from applications.models.admin_role import Role
 from applications.models.admin_log import AdminLog
 
 
-# 获取用户的sqlalchemy对象分页器
+# 获取用户的 sqlalchemy 对象分页器
 from applications.service.common.curd import model_to_dicts
 
 
 def get_user_data(page, limit, filters):
-    user = User.query.filter(and_(*[getattr(User, k).like(v) for k, v in filters.items()])).paginate(page=page,
-                                                                                                     per_page=limit,
-                                                                                                     error_out=False)
+    user = User.query.filter(
+            and_(*[getattr(User, k).like(v) for k, v in filters.items()])
+        ).paginate(page=page,
+                   per_page=limit,
+                   error_out=False)
     count = User.query.count()
     return user, count
 
 
-# 获取用户的dict数据分页器
+# 获取用户的 dict 数据分页器
 def get_user_data_dict(page, limit, filters):
     user, count = get_user_data(page, limit, filters)
     data = model_to_dicts(Schema=UserSchema,model=user.items)
@@ -33,8 +35,10 @@ def get_user_by_name(username):
 
 # 获取当前用户日志
 def get_current_user_logs():
-    log = AdminLog.query.filter_by(url='/admin/login').filter_by(uid=current_user.id).order_by(
-        desc(AdminLog.create_time)).limit(10)
+    log = AdminLog.query.filter_by(
+            url='/admin/login'
+        ).filter_by(uid=current_user.id
+        ).order_by(desc(AdminLog.create_time)).limit(10)
     return log
 
 
@@ -71,7 +75,9 @@ def update_avatar(url):
 
 # 更新用户信息
 def update_user(id, username, realname):
-    user = User.query.filter_by(id=id).update({'username': username, 'realname': realname})
+    user = User.query.filter_by(id=id
+        ).update(
+            {'username': username, 'realname': realname})
     db.session.commit()
     return user
 
@@ -79,7 +85,10 @@ def update_user(id, username, realname):
 # 更新当前用户信息
 def update_current_user_info(req_json):
     r = User.query.filter_by(id=current_user.id).update(
-        {"realname": req_json.get("realName"), "remark": req_json.get("details")})
+        {
+            "realname": req_json.get("realName"),
+            "remark": req_json.get("details")
+        })
     db.session.commit()
     return r
 
@@ -87,17 +96,18 @@ def update_current_user_info(req_json):
 # 修改当前用户密码
 def edit_password(res_json):
     if res_json.get("newPassword") == '':
-        return jsonify(success=False, msg="新密码不得为空")
+        return jsonify(success=False, msg="new password not allowed empty")
     if res_json.get("newPassword") != res_json.get("confirmPassword"):
-        return jsonify(success=False, msg="俩次密码不一样")
+        return jsonify(
+            success=False, msg="difference password between twice input")
     user = current_user
     is_right = user.validate_password(res_json.get("oldPassword"))
     if not is_right:
-        return jsonify(success=False, msg="旧密码错误")
+        return jsonify(success=False, msg="oldPassword not correctly")
     user.set_password(res_json.get("newPassword"))
     db.session.add(user)
     db.session.commit()
-    return jsonify(success=True, msg="更改成功")
+    return jsonify(success=True, msg="update password success")
 
 
 # 删除用户
@@ -152,3 +162,4 @@ def update_user_role(id, roles_list):
     for r in roles:
         user.role.append(r)
     db.session.commit()
+

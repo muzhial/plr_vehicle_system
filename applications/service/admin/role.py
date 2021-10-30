@@ -9,14 +9,16 @@ from applications.service.common.curd import model_to_dicts
 
 
 def get_role_data(page, limit, filters):
-    role = Role.query.filter(and_(*[getattr(Role, k).like(v) for k, v in filters.items()])).paginate(page=page,
-                                                                                                     per_page=limit,
-                                                                                                     error_out=False)
+    role = Role.query.filter(
+            and_(*[getattr(Role, k).like(v) for k, v in filters.items()])
+        ).paginate(page=page,
+                   per_page=limit,
+                   error_out=False)
     count = Role.query.count()
     return role, count
 
 
-# 获取角色dict
+# 获取角色 dict
 def get_role_data_dict(page, limit, filters):
     role, count = get_role_data(page, limit, filters)
     data = model_to_dicts(Schema=RoleSchema, model=role.items)
@@ -29,13 +31,11 @@ def add_role(req):
     enable = req.get("enable")
     roleCode = req.get("roleCode")
     roleName = req.get("roleName")
-    sort = req.get("sort")
     role = Role(
         details=details,
         enable=enable,
         code=roleCode,
-        name=roleName,
-        sort=sort
+        name=roleName
     )
     db.session.add(role)
     db.session.commit()
@@ -146,3 +146,4 @@ def batch_remove(ids):
     # db.session.commit()
     for id in ids:
         remove_role(id)
+

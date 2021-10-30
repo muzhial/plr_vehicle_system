@@ -28,7 +28,6 @@ def save_power(req):
     powerName = req.get("powerName")
     powerType = req.get("powerType")
     powerUrl = req.get("powerUrl")
-    sort = req.get("sort")
     power = Power(
         icon=icon,
         open_type=openType,
@@ -37,7 +36,6 @@ def save_power(req):
         name=powerName,
         type=powerType,
         url=powerUrl,
-        sort=sort,
         enable=1
     )
     r = db.session.add(power)
@@ -45,29 +43,24 @@ def save_power(req):
     return r
 
 
-# 根据id查询权限
 def get_power_by_id(id):
     p = Power.query.filter_by(id=id).first()
     return p
 
 
-# 更新权限
 def update_power(req_json):
     id = req_json.get("powerId")
     data = {
-        "icon": req_json.get("icon"),
-        "open_type": req_json.get("openType"),
         "parent_id": req_json.get("parentId"),
         "code": req_json.get("powerCode"),
         "name": req_json.get("powerName"),
         "type": req_json.get("powerType"),
-        "url": req_json.get("powerUrl"),
-        "sort": req_json.get("sort")
+        "url": req_json.get("powerUrl")
     }
-    print(data)
+    #  print(data)
     power = Power.query.filter_by(id=id).update(data)
     db.session.commit()
-    print(power)
+    #  print(power)
     return power
 
 
@@ -110,3 +103,4 @@ def remove_power(id):
 def batch_remove(ids):
     for id in ids:
         remove_power(id)
+

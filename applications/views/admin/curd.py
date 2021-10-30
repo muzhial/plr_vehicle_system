@@ -19,3 +19,4 @@ def index():
     re = db.Table(*colums).columns
     db.create_all()
     return str(re)
+
