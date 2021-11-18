@@ -24,6 +24,5 @@ class MeasureDataSchema(ma.Schema):
     measureAddress = fields.Str(attribute='measure_address')
     measureInfo = fields.Str(attribute='measure_info')
     measureStatus = fields.Integer(attribute='measure_status')
-    createTime = fields.DateTime('create_time')
-    updateTime = fields.DateTime('update_time')
-
+    createTime = fields.DateTime(attribute='create_time')
+    updateTime = fields.DateTime(attribute='update_time')

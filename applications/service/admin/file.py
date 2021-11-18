@@ -8,9 +8,11 @@ from applications.service.upload import photos
 
 
 def get_photo(page, limit):
-    photo = Photo.query.order_by(desc(Photo.create_time)).paginate(page=page, per_page=limit, error_out=False)
+    photo = Photo.query.order_by(
+            desc(Photo.create_time)
+        ).paginate(page=page, per_page=limit, error_out=False)
     count = Photo.query.count()
-    data = model_to_dicts(Schema=PhotoSchema,model=photo.items)
+    data = model_to_dicts(Schema=PhotoSchema, model=photo.items)
     return data, count
 
 

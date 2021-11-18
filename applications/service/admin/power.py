@@ -21,16 +21,12 @@ def select_parent():
 
 # 增加权限
 def save_power(req):
-    icon = req.get("icon")
-    openType = req.get("openType")
     parentId = req.get("parentId")
     powerCode = req.get("powerCode")
     powerName = req.get("powerName")
     powerType = req.get("powerType")
     powerUrl = req.get("powerUrl")
     power = Power(
-        icon=icon,
-        open_type=openType,
         parent_id=parentId,
         code=powerCode,
         name=powerName,

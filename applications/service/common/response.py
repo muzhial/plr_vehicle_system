@@ -20,7 +20,7 @@ def table_api(msg: str="", count=0, data=None, limit=10):
     return jsonify(res)
 
 
-def res_api(msg, success, status=True, data=None):
+def res_api(msg, success=True, status=True, data=None):
     res = {
         'message': msg,
         'success': success,

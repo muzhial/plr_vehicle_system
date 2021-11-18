@@ -118,4 +118,5 @@ dmypy.json
 .idea/
 
 database.py
+upload/*
 

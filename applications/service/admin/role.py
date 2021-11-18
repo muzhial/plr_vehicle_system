@@ -87,8 +87,8 @@ def update_role_power(id, power_list):
     power_id_list = []
     for p in role.power:
         power_id_list.append(p.id)
-        print(p.id)
-    print(power_id_list)
+        #  print(p.id)
+    #  print(power_id_list)
     powers = Power.query.filter(Power.id.in_(power_id_list)).all()
     for p in powers:
         role.power.remove(p)

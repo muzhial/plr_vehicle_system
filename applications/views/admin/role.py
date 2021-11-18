@@ -55,7 +55,7 @@ def getRolePower(id):
 @admin_role.route('/saveRolePower', methods=['PUT'])
 @authorize_and_log("admin:role:edit")
 def saveRolePower():
-    req_form = request.form
+    req_form = request.json
     powerIds = req_form.get("powerIds")
     power_list = powerIds.split(',')
     roleId = req_form.get("roleId")

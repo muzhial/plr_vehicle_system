@@ -22,4 +22,3 @@ manager.add_command('start',
 
 if __name__ == '__main__':
     manager.run()
-

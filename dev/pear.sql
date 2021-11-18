@@ -114,33 +114,33 @@ CREATE TABLE `admin_power`  (
 INSERT INTO `admin_power` VALUES (
     3,  '用户管理', '1', 'admin:user:main',   '/admin/user/',  '3',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    22, '用户增加', '2', 'admin:user:add',    '',              '3',  NULL, NULL, 1);
+    31, '用户增加', '2', 'admin:user:add',    '',              '3',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    23, '用户编辑', '2', 'admin:user:edit',   '',              '3',  NULL, NULL, 1);
+    32, '用户编辑', '2', 'admin:user:edit',   '',              '3',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    24, '用户删除', '2', 'admin:user:remove', '',              '3',  NULL, NULL, 1);
+    33, '用户删除', '2', 'admin:user:remove', '',              '3',  NULL, NULL, 1);
 
 
 INSERT INTO `admin_power` VALUES (
     4,  '权限管理', '1', 'admin:power:main',  '/admin/power/', '4',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    21, '权限增加', '2', 'admin:power:add',   '',              '4',  NULL, NULL, 1);
+    41, '权限增加', '2', 'admin:power:add',   '',              '4',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    25, '权限编辑', '2', 'admin:power:edit',  '',              '4',  NULL, NULL, 1);
+    42, '权限编辑', '2', 'admin:power:edit',  '',              '4',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    26, '用户删除', '2', 'admin:power:remove', '',             '4',  NULL, NULL, 1);
+    43, '用户删除', '2', 'admin:power:remove', '',             '4',  NULL, NULL, 1);
 
 
 INSERT INTO `admin_power` VALUES (
-    9,  '角色管理', '1', 'admin:role:main',   '/admin/role/',  '9',  NULL, NULL, 1);
+    5,  '角色管理', '1', 'admin:role:main',   '/admin/role/',  '5',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    27, '用户增加', '2', 'admin:role:add',    '',              '9',  NULL, NULL, 1);
+    51, '用户增加', '2', 'admin:role:add',    '',              '5',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    28, '角色编辑', '2', 'admin:role:edit',   '',              '9',  NULL, NULL, 1);
+    52, '角色编辑', '2', 'admin:role:edit',   '',              '5',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    29, '角色删除', '2', 'admin:role:remove', '',              '9',  NULL, NULL, 1);
+    53, '角色删除', '2', 'admin:role:remove', '',              '5',  NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    30, '角色授权', '2', 'admin:role:power',  '',              '9',  NULL, NULL, 1);
+    54, '角色授权', '2', 'admin:role:power',  '',              '5',  NULL, NULL, 1);
 
 
 INSERT INTO `admin_power` VALUES (
@@ -148,21 +148,22 @@ INSERT INTO `admin_power` VALUES (
 
 
 INSERT INTO `admin_power` VALUES (
-    18, '图片上传', '1',  'admin:file:main',  '/admin/file/',  '18', NULL, NULL, 1);
+    6, '图片上传', '1',  'admin:file:main',  '/admin/file/',  '6', NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    31, '图片增加', '2', 'admin:file:add',    '',              '18', NULL, NULL, 1);
+    61, '图片增加', '2', 'admin:file:add',    '',              '6', NULL, NULL, 1);
 INSERT INTO `admin_power` VALUES (
-    32, '图片删除', '2', 'admin:file:delete', '',              '18', NULL, NULL, 1);
+    62, '图片删除', '2', 'admin:file:delete', '',              '6', NULL, NULL, 1);
 
 
---  INSERT INTO `admin_power` VALUES (
-    --  44, '数据字典', '1', 'admin:dict:main', '/admin/dict',     '44',  NULL, NULL, 1);
---  INSERT INTO `admin_power` VALUES (
-    --  45, '字典增加', '2', 'admin:dict:add',  '',                '44', NULL, NULL, 1);
---  INSERT INTO `admin_power` VALUES (
-    --  46, '字典修改', '2', 'admin:dict:edit', '',                '44', NULL, NULL, 1);
---  INSERT INTO `admin_power` VALUES (
-    --  47, '字典删除', '2', 'admin:dict:remove', '',              '44', NULL, NULL, 1);
+INSERT INTO `admin_power` VALUES (
+    7, 'measure data', '1', 'admin:measure:main', '',        '7', NULL, NULL, 1);
+INSERT INTO `admin_power` VALUES (
+    71, 'measure data', '2', 'admin:measure:add', '',         '7', NULL, NULL, 1);
+INSERT INTO `admin_power` VALUES (
+    72, 'measure data', '2', 'admin:measure:edit', '',         '7', NULL, NULL, 1);
+INSERT INTO `admin_power` VALUES (
+    73, 'measure data', '2', 'admin:measure:remove', '',         '7', NULL, NULL, 1);
+
 
 -- ----------------------------
 -- Table structure for admin_role
@@ -180,13 +181,15 @@ CREATE TABLE `admin_role`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
+-- ----------------------------;
 -- Records of admin_role
 -- ----------------------------
 INSERT INTO `admin_role` VALUES (
     1, '管理员', 'admin', NULL, 'admin', NULL, NULL, 1);
 INSERT INTO `admin_role` VALUES (
     2, '普通用户', 'common', NULL, 'read only', NULL, NULL, 1);
+INSERT INTO `admin_role` VALUES (
+    3, 'poster', 'poster', NULL, 'post data', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for admin_role_power
@@ -203,36 +206,45 @@ CREATE TABLE `admin_role_power`  (
   CONSTRAINT `admin_role_power_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `admin_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 212 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Records of admin_role_power
--- ----------------------------
+INSERT INTO `admin_role_power` VALUES (213, 3, 1);
+INSERT INTO `admin_role_power` VALUES (214, 31, 1);
+INSERT INTO `admin_role_power` VALUES (215, 32, 1);
+INSERT INTO `admin_role_power` VALUES (216, 33, 1);
 
-INSERT INTO `admin_role_power` VALUES (164, 13, 2);
-INSERT INTO `admin_role_power` VALUES (193, 13, 1);
+INSERT INTO `admin_role_power` VALUES (217, 4, 1);
+INSERT INTO `admin_role_power` VALUES (218, 41, 1);
+INSERT INTO `admin_role_power` VALUES (219, 42, 1);
+INSERT INTO `admin_role_power` VALUES (220, 43, 1);
 
-INSERT INTO `admin_role_power` VALUES (160, 3, 2);
-INSERT INTO `admin_role_power` VALUES (189, 3, 1);
-INSERT INTO `admin_role_power` VALUES (197, 22, 1);
-INSERT INTO `admin_role_power` VALUES (198, 23, 1);
-INSERT INTO `admin_role_power` VALUES (199, 24, 1);
+INSERT INTO `admin_role_power` VALUES (221, 5, 1);
+INSERT INTO `admin_role_power` VALUES (222, 51, 1);
+INSERT INTO `admin_role_power` VALUES (223, 52, 1);
+INSERT INTO `admin_role_power` VALUES (224, 53, 1);
+INSERT INTO `admin_role_power` VALUES (225, 54, 1);
 
-INSERT INTO `admin_role_power` VALUES (161, 4, 2);
-INSERT INTO `admin_role_power` VALUES (190, 4, 1);
-INSERT INTO `admin_role_power` VALUES (196, 21, 1);
-INSERT INTO `admin_role_power` VALUES (200, 25, 1);
-INSERT INTO `admin_role_power` VALUES (201, 26, 1);
+INSERT INTO `admin_role_power` VALUES (226, 13, 1);
 
-INSERT INTO `admin_role_power` VALUES (162, 9, 2);
-INSERT INTO `admin_role_power` VALUES (191, 9, 1);
-INSERT INTO `admin_role_power` VALUES (202, 27, 1);
-INSERT INTO `admin_role_power` VALUES (203, 28, 1);
-INSERT INTO `admin_role_power` VALUES (204, 29, 1);
-INSERT INTO `admin_role_power` VALUES (205, 30, 1);
+INSERT INTO `admin_role_power` VALUES (227, 6, 1);
+INSERT INTO `admin_role_power` VALUES (228, 61, 1);
+INSERT INTO `admin_role_power` VALUES (229, 62, 1);
 
-INSERT INTO `admin_role_power` VALUES (166, 18, 2);
-INSERT INTO `admin_role_power` VALUES (195, 18, 1);
-INSERT INTO `admin_role_power` VALUES (206, 31, 1);
-INSERT INTO `admin_role_power` VALUES (207, 32, 1);
+INSERT INTO `admin_role_power` VALUES (230, 7, 1);
+INSERT INTO `admin_role_power` VALUES (231, 71, 1);
+INSERT INTO `admin_role_power` VALUES (232, 72, 1);
+INSERT INTO `admin_role_power` VALUES (233, 73, 1);
+
+INSERT INTO `admin_role_power` VALUES (234, 3, 2);
+INSERT INTO `admin_role_power` VALUES (235, 4, 2);
+INSERT INTO `admin_role_power` VALUES (236, 5, 2);
+INSERT INTO `admin_role_power` VALUES (237, 13, 2);
+INSERT INTO `admin_role_power` VALUES (238, 6, 2);
+INSERT INTO `admin_role_power` VALUES (239, 7, 2);
+
+INSERT INTO `admin_role_power` VALUES (240, 6, 3);
+INSERT INTO `admin_role_power` VALUES (241, 61, 3);
+INSERT INTO `admin_role_power` VALUES (242, 7, 3);
+INSERT INTO `admin_role_power` VALUES (243, 71, 3);
+
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -259,6 +271,16 @@ INSERT INTO `admin_user` VALUES (
     'pbkdf2:sha256:150000$d6llBPnx$a745958a0eb53726425d6bd0e6017ebd88ba7d104f138ccc98bd62d53ed968df',
     '2021-10-30 03:35:00', '2021-10-30 03:35:00',
     1, '超级管理', '', '');
+INSERT INTO `admin_user` VALUES (
+    9, 'front',
+    'pbkdf2:sha256:150000$o3QiVBPE$cf3025ec34092d97c161baa637cb32374c0446a5fef0cba32f38309998b95063',
+    '2021-10-30 03:35:00', '2021-10-30 03:35:00',
+    1, 'front', '', '');
+INSERT INTO `admin_user` VALUES (
+    10, 'poster',
+    'pbkdf2:sha256:150000$61g9bZMj$bb88acab39145b2b74e8a4727298e85ff9b3935fc5e4e2274a1e121963b55290',
+    '2021-10-30 03:35:00', '2021-10-30 03:35:00',
+    1, 'poster', '', '');
 
 -- ----------------------------
 -- Table structure for admin_user_role
@@ -279,6 +301,8 @@ CREATE TABLE `admin_user_role`  (
 -- Records of admin_user_role
 -- ----------------------------
 INSERT INTO `admin_user_role` VALUES (14, 1, 1);
+INSERT INTO `admin_user_role` VALUES (18, 9, 2);
+INSERT INTO `admin_user_role` VALUES (19, 10, 3);
 
 -- ----------------------------
 -- Table structure for alembic_version
