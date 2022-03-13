@@ -32,6 +32,13 @@ def save_measure_data(req_json):
     return d.id
 
 
+def bulk_save_measure_data(req_json):
+    datas = req_json.get('data')
+    db.session.bulk_insert_mappings(MeasureData, datas)
+    db.session.commit()
+    return True
+
+
 def update_measure_data(req_json):
     id = req_json.get('dataId')
     MeasureData.query.filter_by(id=id).update({

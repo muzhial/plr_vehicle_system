@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, jsonify
 from applications.models.admin_measure_data import MeasureData
 from applications.service.admin.data_proc import (
     get_measure_data, save_measure_data, update_measure_data,
-    delete_data_by_id)
+    delete_data_by_id, bulk_save_measure_data)
 from applications.service.common.response import (
         table_api, success_api, fail_api, res_api)
 from applications.service.route_auth import authorize_and_log
@@ -21,11 +21,25 @@ def dictCode_data():
     return table_api(data=data,count=count)
 
 
+# @admin_measure_data.route('/save', methods=['POST'])
+# @authorize_and_log("admin:measure:add")
+# def dictData_save():
+#     req_json = request.json
+#     res = save_measure_data(req_json=req_json)
+#     if res == None:
+#         return res_api(success=False,
+#                        msg="add measure data fail",
+#                        status=True)
+#     return res_api(success=True,
+#                    msg="add measure data success")
+
+
 @admin_measure_data.route('/save', methods=['POST'])
 @authorize_and_log("admin:measure:add")
 def dictData_save():
     req_json = request.json
-    res = save_measure_data(req_json=req_json)
+    # res = save_measure_data(req_json=req_json)
+    res = bulk_save_measure_data(req_json=req_json)
     if res == None:
         return res_api(success=False,
                        msg="add measure data fail",

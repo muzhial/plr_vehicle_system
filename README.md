@@ -101,3 +101,17 @@ json:
     "measureInfo": "nothing"
 }
 ```
+
+```
+bulk_insert
+
+/admin/measure/save [POST]
+json:
+{
+    "data": [
+        {"coord_xyz": "0.12 0.123 0.1231", "measure_address": "folder1", "measure_time": "2022-03-12 12:12:00"},
+        {"coord_xyz": "0.02 0.923 0.81", "measure_address": "folder1", "measure_time": "2022-03-12 12:56:00"},
+    ]
+}
+
+```
