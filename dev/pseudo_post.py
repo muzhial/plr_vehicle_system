@@ -76,11 +76,11 @@ def job(measure_dir):
         for measure_file in measure_files:
             results = read_file(os.path.join(measure_dir, measure_file))
             results = parse_data(results, measure_dir)
-            # res = post_data(results, POST_URL)
+            res = post_data(results, POST_URL)
             with open(record_file, 'w+') as f:
                 f.write(measure_file)
 
-        print(measure_files)
+        # print(measure_files)
 
     except Exception as e:
         print(f'{e}\n{measure_files}\n')
@@ -100,7 +100,7 @@ def post_data_schedule(work_dir):
     measure_dir = [os.path.join(work_dir, i)
                    for i in os.listdir(work_dir) if os.path.isdir(i)]
     for m in measure_dir:
-        schedule.every(15).seconds.do(run_threaded, job, m)
+        schedule.every(15).minutes.do(run_threaded, job, m)
 
     while True:
         schedule.run_pending()
